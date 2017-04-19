@@ -13,10 +13,6 @@ func cliconfig() *cli.App {
 	app.Description = "this program will generate a token according to a provided policy\n   calculate the expiration time for that token, and store all that info\n   in vault under a provided path."
 	app.Version = "0.1"
 
-	// app.Action = func(c *cli.Context) error {
-
-	// }
-
 	app.Flags = []cli.Flag{
 		cli.StringFlag{
 			Name:        "policy-name, p",
@@ -26,6 +22,7 @@ func cliconfig() *cli.App {
 	}
 
 	app.Action = func(c *cli.Context) {
+
 		genToken()
 
 	}
@@ -44,4 +41,5 @@ func cliconfig() *cli.App {
 	//   },
 	// }
 	return app
+
 }

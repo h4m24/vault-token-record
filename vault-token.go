@@ -1,8 +1,8 @@
 package main
 
 import (
-	"fmt"
 	"strings"
+	"time"
 
 	"github.com/hashicorp/vault/api"
 )
@@ -37,8 +37,30 @@ func genToken() {
 	}
 
 	// printing property of the token returned by vault
-	fmt.Println(vaultResponse.Renewable)
+	type vaultRepliedToken struct {
+		Token         string
+		Accessor      string
+		LeaseDuration string
+		Policies      string
+		Renewable     string
+		Metadata      string
+	}
+	// return token lease time in seconds
+	// fmt.Println(vaultResponse.Auth.LeaseDuration)
+	// tokenExpireTime := time.Now().Local().Add(time.Hour * time.Duration(Hours) +
+	//                              time.Minute * time.Duration(Mins) +
+	//                              time.Second * time.Duration(Sec))
 
+	tokenExpireTime := time.Now().Local().Add(time.Second * time.Duration(vaultResponse.Auth.LeaseDuration)).Format("2006-01-02")
+
+	println(tokenExpireTime)
+
+	// var f interface{}
+	// err := json.Unmarshal(vaultResponse.Data, &f)
+	// fmt.Println(vaultResponse.Data)
+
+	// tokenValues = vaultResponse.Data
+	// fmt.Println(tokenValues)
 	// fmt.Printf("%v", vaultResponse)
 
 	// secrets, err := client.Logical().Read("tokens")

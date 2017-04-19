@@ -13,15 +13,22 @@ create an orphan token
 */
 package main
 
-import "os"
+import (
+	"fmt"
+	"os"
+)
 
 // const EnvVaultAddress = "VAULT_ADDR"
 var policyName string
 
 func main() {
-	app := cliconfig()
-	app.Run(os.Args)
-
+	if len(os.Args) > 1 {
+		app := cliconfig()
+		app.Run(os.Args)
+	} else {
+		fmt.Println("input error")
+		os.Exit(2)
+	}
 	// fmt.Println(policyName)
 	// config := getconfigs()
 	//  how to get 1 config
