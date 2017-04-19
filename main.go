@@ -15,12 +15,13 @@ package main
 
 import "os"
 
+// const EnvVaultAddress = "VAULT_ADDR"
 var policyName string
 
 func main() {
 	app := cliconfig()
 	app.Run(os.Args)
-
+	genToken()
 	// fmt.Println(policyName)
 	// config := getconfigs()
 	//  how to get 1 config
