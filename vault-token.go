@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"strings"
 	"time"
 
@@ -45,15 +46,16 @@ func genToken() {
 		Renewable     string
 		Metadata      string
 	}
-	// return token lease time in seconds
-	// fmt.Println(vaultResponse.Auth.LeaseDuration)
-	// tokenExpireTime := time.Now().Local().Add(time.Hour * time.Duration(Hours) +
-	//                              time.Minute * time.Duration(Mins) +
-	//                              time.Second * time.Duration(Sec))
 
 	tokenExpireTime := time.Now().Local().Add(time.Second * time.Duration(vaultResponse.Auth.LeaseDuration)).Format("2006-01-02")
 
-	println(tokenExpireTime)
+	println("accessor:  " + vaultResponse.Auth.Accessor)
+	println("token:  " + vaultResponse.Auth.ClientToken)
+	println("expires: " + tokenExpireTime)
+	println("policies:  ")
+	fmt.Printf("%v", vaultResponse.Auth.Policies)
+	println("\nis renewable:")
+	fmt.Println(vaultResponse.Auth.Renewable)
 
 	// var f interface{}
 	// err := json.Unmarshal(vaultResponse.Data, &f)
