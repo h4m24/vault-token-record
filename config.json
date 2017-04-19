@@ -1,5 +1,5 @@
 {
-  "vaultaddress": "localhost:8200",
+  "vaultaddress": "http://127.0.0.1:8200",
   "tokenspath":  "tokens/",
-  "vaulttoken": "none"
+  "vaulttoken": "29101215-cb10-ba03-9839-6b84d970c708"
 }

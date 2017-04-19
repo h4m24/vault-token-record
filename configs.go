@@ -26,7 +26,7 @@ func (p config) toString() string {
 	return toJSON(p)
 }
 
-func getPages() config {
+func getconfigs() config {
 	raw, err := ioutil.ReadFile("./config.json")
 	if err != nil {
 		fmt.Println(err.Error())

@@ -5,14 +5,22 @@ first read json config file
   read vault address
   read token store path
   read script token
+
+CLI flags
+
+create an orphan token
+
 */
 package main
 
-import "fmt"
+import "os"
 
 func main() {
+	app := cliconfig()
+	app.Run(os.Args)
 
-	pages := getPages()
-
-	fmt.Println(toJSON(pages))
+	// config := getconfigs()
+	//  how to get 1 config
+	// fmt.Println(config.TokensPath)
+	// fmt.Println(toJSON(config))
 }
