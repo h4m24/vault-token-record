@@ -1,0 +1,5 @@
+{
+  "vaultaddress": "localhost:8200",
+  "tokenspath":  "tokens/",
+  "vaulttoken": "none"
+}
