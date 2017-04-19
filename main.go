@@ -15,10 +15,13 @@ package main
 
 import "os"
 
+var policyName string
+
 func main() {
 	app := cliconfig()
 	app.Run(os.Args)
 
+	// fmt.Println(policyName)
 	// config := getconfigs()
 	//  how to get 1 config
 	// fmt.Println(config.TokensPath)
