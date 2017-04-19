@@ -22,7 +22,7 @@ func cliconfig() *cli.App {
 	}
 
 	app.Action = func(c *cli.Context) {
-		println("Greetings")
+		genToken()
 
 	}
 
