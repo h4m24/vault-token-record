@@ -22,11 +22,11 @@ import (
 var policyName string
 
 func main() {
+	app := cliconfig()
 	if len(os.Args) > 1 {
-		app := cliconfig()
 		app.Run(os.Args)
 	} else {
-		fmt.Println("input error")
+		fmt.Println("enter  --help to show available options")
 		os.Exit(2)
 	}
 	// fmt.Println(policyName)
