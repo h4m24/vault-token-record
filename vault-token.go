@@ -36,26 +36,8 @@ func genToken() {
 		panic(err)
 	}
 
-	// printing property of the token returned by vault
-	type vaultRepliedToken struct {
-		Token         string
-		Accessor      string
-		LeaseDuration string
-		Policies      string
-		Renewable     string
-		Metadata      string
-	}
-
 	tokenExpireTime := time.Now().Local().Add(time.Second * time.Duration(vaultResponse.Auth.LeaseDuration)).Format("2006-01-02")
 	println("writing to " + config.VaultAddress)
-
-	// println("accessor:  " + vaultResponse.Auth.Accessor)
-	// println("token:  " + vaultResponse.Auth.ClientToken)
-	// println("expires: " + tokenExpireTime)
-	// println("policies:  ")
-	// fmt.Printf("%v", vaultResponse.Auth.Policies)
-	// println("\nis renewable:")
-	// fmt.Println(vaultResponse.Auth.Renewable)
 
 	client.Logical().Write(config.TokensPath, map[string]interface{}{
 		"accessor":       vaultResponse.Auth.Accessor,
@@ -66,20 +48,4 @@ func genToken() {
 		"renewable":      vaultResponse.Auth.Renewable,
 	})
 
-	// secrets, err := client.Logical().Read("tokens")
-	// fmt.Printf("%v+", secrets.Data)
-
-	// generate the token with properties above
-	// vaultAnswer := client.Auth().Token().CreateOrphan(orphanRequest)
-	// client.Token()
-
-	// fmt.Printf("%v+", vaultAnswer.LeaseID)
-
-	//
-	// secrets, err := client.Logical().Read("tokens")
-	// if err != nil {
-	// 	panic(err)
-	// }
-	//
-	// fmt.Printf("%v+", secrets.Data)
 }
