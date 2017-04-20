@@ -15,7 +15,14 @@ func genToken() {
 	clientConfig := &api.Config{
 		Address: config.VaultAddress,
 	}
+	clientTlsconfig := &api.TLSConfig{
+		Insecure: true,
+	}
 
+	err := clientConfig.ConfigureTLS(clientTlsconfig)
+	if err != nil {
+		panic(err)
+	}
 	// pass policy name from CLI to vault client struct
 	orphanRequest := &api.TokenCreateRequest{
 		Policies: strings.Fields(policyName),
@@ -26,6 +33,7 @@ func genToken() {
 	if err != nil {
 		panic(err)
 	}
+
 	// setting vault token
 	client.SetToken(config.VaultToken)
 
