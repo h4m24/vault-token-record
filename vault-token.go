@@ -1,7 +1,6 @@
 package main
 
 import (
-	"fmt"
 	"strings"
 	"time"
 
@@ -48,22 +47,24 @@ func genToken() {
 	}
 
 	tokenExpireTime := time.Now().Local().Add(time.Second * time.Duration(vaultResponse.Auth.LeaseDuration)).Format("2006-01-02")
+	println("writing to " + config.VaultAddress)
 
-	println("accessor:  " + vaultResponse.Auth.Accessor)
-	println("token:  " + vaultResponse.Auth.ClientToken)
-	println("expires: " + tokenExpireTime)
-	println("policies:  ")
-	fmt.Printf("%v", vaultResponse.Auth.Policies)
-	println("\nis renewable:")
-	fmt.Println(vaultResponse.Auth.Renewable)
+	// println("accessor:  " + vaultResponse.Auth.Accessor)
+	// println("token:  " + vaultResponse.Auth.ClientToken)
+	// println("expires: " + tokenExpireTime)
+	// println("policies:  ")
+	// fmt.Printf("%v", vaultResponse.Auth.Policies)
+	// println("\nis renewable:")
+	// fmt.Println(vaultResponse.Auth.Renewable)
 
-	// var f interface{}
-	// err := json.Unmarshal(vaultResponse.Data, &f)
-	// fmt.Println(vaultResponse.Data)
-
-	// tokenValues = vaultResponse.Data
-	// fmt.Println(tokenValues)
-	// fmt.Printf("%v", vaultResponse)
+	client.Logical().Write(config.TokensPath, map[string]interface{}{
+		"accessor":       vaultResponse.Auth.Accessor,
+		"token":          vaultResponse.Auth.ClientToken,
+		"lease duration": vaultResponse.Auth.LeaseDuration,
+		"expires":        tokenExpireTime,
+		"policies":       vaultResponse.Auth.Policies,
+		"renewable":      vaultResponse.Auth.Renewable,
+	})
 
 	// secrets, err := client.Logical().Read("tokens")
 	// fmt.Printf("%v+", secrets.Data)
